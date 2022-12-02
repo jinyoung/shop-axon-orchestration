@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 //@RepositoryRestResource(path = "orderStatuses", collectionResourceRel = "orderStatuses")
-public interface OrderStatusRepository extends JpaRepository<OrderStatus, Long> {
+public interface OrderReadModelRepository extends JpaRepository<OrderReadModel, Long> {
 
 /*
     @Override

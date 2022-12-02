@@ -23,7 +23,7 @@ public class SagaSaga {
     private String processId;
 
     @StartSaga
-    @SagaEventHandler(associationProperty = "#correlation-key")
+    @SagaEventHandler(associationProperty = "id")
     public void onOrderPlaced(OrderPlacedEvent event) {
         DecreaseInventoryCommand command = new DecreaseInventoryCommand();
 
@@ -36,7 +36,7 @@ public class SagaSaga {
             });
     }
 
-    @SagaEventHandler(associationProperty = "#correlation-key")
+    @SagaEventHandler(associationProperty = "id")
     public void onInventoryDescreased(InventoryDescreasedEvent event) {
         AddToDeliveryListCommand command = new AddToDeliveryListCommand();
 
@@ -50,6 +50,6 @@ public class SagaSaga {
     }
 
     @EndSaga
-    @SagaEventHandler(associationProperty = "#correlation-key")
+    @SagaEventHandler(associationProperty = "orderId")
     public void onDeliveryStarted(DeliveryStartedEvent event) {}
 }

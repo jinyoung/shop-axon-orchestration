@@ -112,7 +112,7 @@ public class OrderController {
   EventStore eventStore;
 
   @GetMapping(value="/orders/{id}/events")
-  public ResponseEntity getEvents(@PathVariable("id") Long id){
+  public ResponseEntity getEvents(@PathVariable("id") String id){
       ArrayList resources = new ArrayList<OrderAggregate>(); 
       eventStore.readEvents(id).asStream().forEach(resources::add);
 

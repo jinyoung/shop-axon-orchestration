@@ -41,11 +41,15 @@ public class OrderAggregate {
         BeanUtils.copyProperties(command, event);     
 
                 //Please uncomment here and implement the createUUID method.
-        //event.setId(createUUID());
+//        event.setId(createUUID());
         
         apply(event);
 
     }
+
+    // private Long createUUID() {
+    //     return java.util.UUID.toString();
+    // }
 
     @CommandHandler
     public void handle(CancelCommand command){
@@ -85,8 +89,7 @@ public class OrderAggregate {
 
     @EventSourcingHandler
     public void on(OrderCancelledEvent event) {
-        BeanUtils.copyProperties(event, this);
-        
+       setStatus("CANCELLED");
     }
 
 

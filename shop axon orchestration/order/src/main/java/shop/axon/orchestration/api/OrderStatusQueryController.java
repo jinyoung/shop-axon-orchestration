@@ -29,9 +29,9 @@ public class OrderStatusQueryController {
 
   @GetMapping("/orderStatuses")
   public CompletableFuture findAll() {
-      return queryGateway.query(new OrderStatusQuery(), ResponseTypes.multipleInstancesOf(OrderStatus.class))
+      return queryGateway.query(new OrderReadModelQuery(), ResponseTypes.multipleInstancesOf(OrderReadModel.class))
               .thenApply(resources -> {
-                CollectionModel<OrderStatus> model = CollectionModel.of(resources);
+                CollectionModel<OrderReadModel> model = CollectionModel.of(resources);
                 
                 return new ResponseEntity<>(model, HttpStatus.OK);
             });
@@ -40,16 +40,16 @@ public class OrderStatusQueryController {
 
   @GetMapping("/orderStatuses/{id}")
   public CompletableFuture findById(@PathVariable("id") Long id) {
-    OrderStatusSingleQuery query = new OrderStatusSingleQuery();
+    OrderReadModelSingleQuery query = new OrderReadModelSingleQuery();
     query.setId(id);
 
-      return queryGateway.query(query, ResponseTypes.optionalInstanceOf(OrderStatus.class))
+      return queryGateway.query(query, ResponseTypes.optionalInstanceOf(OrderReadModel.class))
               .thenApply(resource -> {
                 if(!resource.isPresent()){
                   return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
                 }
 
-                EntityModel<OrderStatus> model = EntityModel.of(resource.get());
+                EntityModel<OrderReadModel> model = EntityModel.of(resource.get());
                 model
                       .add(Link.of("/orderStatuses/" + resource.get().getId()).withSelfRel());
               

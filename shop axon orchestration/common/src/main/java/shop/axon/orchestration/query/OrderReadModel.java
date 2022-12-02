@@ -4,6 +4,7 @@ import org.springframework.hateoas.server.core.Relation;
 
 import javax.persistence.*;
 import java.util.List;
+import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Data;
 
@@ -12,15 +13,15 @@ import lombok.Data;
 @Table(name="OrderStatus_table")
 @Data
 @Relation(collectionRelation = "orderStatuses")
-public class OrderStatus {
+public class OrderReadModel {
 
         @Id
-        //@GeneratedValue(strategy=GenerationType.AUTO)
         private Long id;
-        private String status;
-        private Double amount;
-        private Long qty;
         private String productId;
-
+        private Integer qty;
+        private String customerId;
+        private BigDecimal amount;
+        private String status;
+        private String address;
 
 }
